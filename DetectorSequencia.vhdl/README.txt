@@ -1,0 +1,1 @@
+A FSM começa no estado inicial (S0). Cada vez que o bit de entrada é recebido, a máquina de estados vai para o próximo estado, até que apareça a sequência "11010". Quando isso acontece, a saída detect é ativada, mostrando que a sequência foi detectada.
