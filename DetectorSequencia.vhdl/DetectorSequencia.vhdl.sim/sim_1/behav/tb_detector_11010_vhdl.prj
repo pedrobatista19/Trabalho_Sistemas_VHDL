@@ -1,0 +1,6 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  "../../../DetectorDeSequencia.srcs/sources_1/new/DetectorSequencia.vhd"
+vhdl xil_defaultlib  "../../../DetectorDeSequencia.srcs/sim_1/new/tb_DetectorSequencia.vhd"
+
+# Do not sort compile order
+nosort
