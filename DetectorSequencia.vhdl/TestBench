@@ -1,0 +1,78 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity tb_detector_11010 is
+end tb_detector_11010;
+
+architecture sim of tb_detector_11010 is
+
+    component detector_11010
+        Port (
+            clk     : in  STD_LOGIC;
+            reset   : in  STD_LOGIC;
+            entrada : in  STD_LOGIC;
+            detect  : out STD_LOGIC
+        );
+    end component;
+
+    -- Sinais para conectar
+    signal clk     : STD_LOGIC := '0';
+    signal reset   : STD_LOGIC := '1';
+    signal entrada : STD_LOGIC := '0';
+    signal detect  : STD_LOGIC;
+
+begin
+
+    -- Instancia o DUT
+    uut: detector_11010
+        port map (
+            clk     => clk,
+            reset   => reset,
+            entrada => entrada,
+            detect  => detect
+        );
+
+    -- Geração de clock
+    clk_process : process
+    begin
+        while true loop
+            clk <= '0'; wait for 10 ns;
+            clk <= '1'; wait for 10 ns;
+        end loop;
+    end process;
+
+    -- Estímulos
+    stim_proc: process
+    begin
+        -- Reset inicial
+        wait for 20 ns;
+        reset <= '0';
+
+        -- Teste: sequência com 11010 em vários lugares
+        -- Entrada:      1 1 0 1 0 | 1 1 1 1 0 1 0 | 0 1 1 0 1 0
+        -- Detect deve:              ^           ^           ^
+        entrada <= '1'; wait for 20 ns;
+        entrada <= '1'; wait for 20 ns;
+        entrada <= '0'; wait for 20 ns;
+        entrada <= '1'; wait for 20 ns;
+        entrada <= '0'; wait for 20 ns; -- Detecta aqui!
+
+        entrada <= '1'; wait for 20 ns;
+        entrada <= '1'; wait for 20 ns;
+        entrada <= '1'; wait for 20 ns;
+        entrada <= '1'; wait for 20 ns;
+        entrada <= '0'; wait for 20 ns;
+        entrada <= '1'; wait for 20 ns;
+        entrada <= '0'; wait for 20 ns; -- Detecta aqui!
+
+        entrada <= '0'; wait for 20 ns;
+        entrada <= '1'; wait for 20 ns;
+        entrada <= '1'; wait for 20 ns;
+        entrada <= '0'; wait for 20 ns;
+        entrada <= '1'; wait for 20 ns;
+        entrada <= '0'; wait for 20 ns; -- Detecta aqui!
+
+        wait; -- fim da simulação
+    end process;
+
+end sim;
