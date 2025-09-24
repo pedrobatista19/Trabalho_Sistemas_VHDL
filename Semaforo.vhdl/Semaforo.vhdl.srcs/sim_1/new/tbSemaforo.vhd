@@ -1,0 +1,67 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity tb_semaforo_com_btn is
+end tb_semaforo_com_btn;
+
+architecture sim of tb_semaforo_com_btn is
+
+    -- Declara o componente do DUT (Device Under Test)
+    component semaforo_com_btn
+        Port (
+            clk     : in  STD_LOGIC;
+            reset   : in  STD_LOGIC;
+            btn     : in  STD_LOGIC;
+            vermelho : out STD_LOGIC;
+            amarelo : out STD_LOGIC;
+            verde    : out STD_LOGIC
+        );
+    end component;
+
+    signal clk       : STD_LOGIC := '0';
+    signal reset     : STD_LOGIC := '1'; -- Inicializa com reset
+    signal btn       : STD_LOGIC := '0'; -- Botão de pedestre (não pressionado)
+    signal vermelho  : STD_LOGIC;
+    signal amarelo   : STD_LOGIC;
+    signal verde     : STD_LOGIC;
+
+begin
+
+    -- Instancia o DUT
+    uut: semaforo_com_btn
+        port map (
+            clk       => clk,
+            reset     => reset,
+            btn       => btn,
+            vermelho  => vermelho,
+            amarelo   => amarelo,
+            verde     => verde
+        );
+
+    -- Clock
+    clk_process : process
+    begin
+        while true loop
+            clk <= '0'; wait for 10 ns;
+            clk <= '1'; wait for 10 ns;
+        end loop;
+    end process;
+
+    stim_proc: process
+    begin
+        -- Reset inicial
+        reset <= '1'; wait for 20 ns;
+        reset <= '0'; wait for 20 ns;
+
+        wait for 100 ns;  -- O semáforo deve passar de verde -> amarelo -> vermelho -> verde
+
+        btn <= '1'; wait for 20 ns;  -- Botão pressionado
+        wait for 100 ns;  -- O semáforo deve ir para amarelo -> vermelho -> vermelho por 2 tempos -> verde
+
+        -- Teste: Sem botão pressionado, ciclo normal novamente
+        btn <= '0'; wait for 100 ns;
+
+        wait; -- Fim da simulação
+    end process;
+
+end sim;
