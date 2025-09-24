@@ -1,0 +1,1 @@
+Este projeto mostra como utilizar uma FSM Moore para controlar um semáforo com a interação de um botão de pedestre. A implementação do código em VHDL permite observar o comportamento correto do semáforo, mostrando funcionalidade em diferentes cenários.
