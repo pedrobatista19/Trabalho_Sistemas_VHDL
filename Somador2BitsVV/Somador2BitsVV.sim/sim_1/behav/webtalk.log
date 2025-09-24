@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2015.1 (64-bit)
+# SW Build 1215546 on Mon Apr 27 19:22:08 MDT 2015
+# IP Build 1209967 on Tue Apr 21 11:39:20 MDT 2015
+# Start of session at: Wed Sep 24 09:07:21 2025
+# Process ID: 384
+# Log file: C:/Users/laboratorio/Desktop/Somador de 2 bits/Somador de 2 bits.sim/sim_1/behav/webtalk.log
+# Journal file: C:/Users/laboratorio/Desktop/Somador de 2 bits/Somador de 2 bits.sim/sim_1/behav\webtalk.jou
+#-----------------------------------------------------------
+source C:/Users/laboratorio/Desktop/Somador -notrace
+couldn't read file "C:/Users/laboratorio/Desktop/Somador": no such file or directory
+INFO: [Common 17-206] Exiting Webtalk at Wed Sep 24 09:07:21 2025...
